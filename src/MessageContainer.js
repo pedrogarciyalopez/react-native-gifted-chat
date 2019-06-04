@@ -90,6 +90,10 @@ export default class MessageContainer extends React.PureComponent {
   };
 
   handleOnScroll = (event) => {
+    if (this.parentOnScroll) {
+      this.parentOnScroll(event);
+    }
+
     if (event.nativeEvent.contentOffset.y > this.props.scrollToBottomOffset) {
       this.setState({ showScrollBottom: true });
     } else {
@@ -153,6 +157,14 @@ export default class MessageContainer extends React.PureComponent {
     if (this.props.messages.length === 0) {
       return <View style={styles.container} />;
     }
+
+    const {listViewProps} = this.props;
+
+    if (listViewProps.onScroll) {
+      this.parentOnScroll = listViewProps.onScroll;
+      delete listViewProps.onScroll;
+    }
+
     return (
       <View style={this.props.alignTop ? styles.containerAlignTop : styles.container}>
         {this.state.showScrollBottom && this.props.scrollToBottom ? this.renderScrollToBottomWrapper() : null}
