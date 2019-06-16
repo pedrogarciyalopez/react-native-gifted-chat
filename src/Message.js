@@ -39,6 +39,15 @@ export default class Message extends React.Component {
     const current = this.props.currentMessage;
     const { previousMessage } = this.props;
     const nextPropsPreviousMessage = nextProps.previousMessage;
+    const previousNextMessage = this.props.nextMessage;
+    const { nextMessage } = nextProps;
+
+    if (!Object.keys(previousNextMessage).length &&
+      Object.keys(nextMessage).length &&
+      isSameUser(current, nextMessage)) {
+      return true
+    }
+
     return (
       next.sent !== current.sent ||
       next.received !== current.received ||

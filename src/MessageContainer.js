@@ -132,23 +132,27 @@ export default class MessageContainer extends React.PureComponent {
 
   renderHeaderWrapper = () => <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>;
 
+  renderScrollBottomComponent() {
+    const { scrollToBottomComponent } = this.props
+
+    if (scrollToBottomComponent) {
+      return scrollToBottomComponent()
+    }
+
+    return <Text>V</Text>
+  }
+
   renderScrollToBottomWrapper() {
-    const scrollToBottomComponent = (
-      <View style={styles.scrollToBottomStyle}>
-        <TouchableOpacity onPress={this.scrollToBottom} hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}>
-          <Text>V</Text>
+    return (
+      <View style={[styles.scrollToBottomStyle, this.props.scrollToBottomWrapperStyle]}>
+        <TouchableOpacity
+          onPress={this.scrollToBottom}
+          hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}
+        >
+          {this.renderScrollBottomComponent()}
         </TouchableOpacity>
       </View>
-    );
-
-    if (this.props.scrollToBottomComponent) {
-      return (
-        <TouchableOpacity onPress={this.scrollToBottom} hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}>
-          {this.props.scrollToBottomComponent}
-        </TouchableOpacity>
-      );
-    }
-    return scrollToBottomComponent;
+    )
   }
 
   keyExtractor = (item) => `${item._id}`;
@@ -214,12 +218,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     paddingHorizontal: 15,
     paddingVertical: 8,
-    right: 10,
-    bottom: 30,
+    right: 15,
+    bottom: 15,
     zIndex: 999,
-    height: 40,
-    width: 40,
-    borderRadius: 20,
+    height: 45,
+    width: 45,
+    borderRadius: 22.5,
     backgroundColor: Color.white,
     alignItems: 'center',
     justifyContent: 'center',
