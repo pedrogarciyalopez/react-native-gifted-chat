@@ -5,8 +5,8 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, ViewPropTypes } from 'react-native';
 import Color from './Color';
 
-export default function Send({ text, containerStyle, onSend, children, textStyle, label, alwaysShowSend, disabled }) {
-  if (alwaysShowSend || text.trim().length > 0) {
+export default function Send({ text, containerStyle, onSend, children, textStyle, label, alwaysShowSend, disabled, shouldShowSend }) {
+  if (alwaysShowSend || text.trim().length > 0 || shouldShowSend()) {
     return (
       <TouchableOpacity
         testID="send"
@@ -51,6 +51,7 @@ Send.defaultProps = {
   children: null,
   alwaysShowSend: false,
   disabled: false,
+  shouldShowSend: () => false
 };
 
 Send.propTypes = {
