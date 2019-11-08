@@ -63,4 +63,5 @@ Send.propTypes = {
   children: PropTypes.element,
   alwaysShowSend: PropTypes.bool,
   disabled: PropTypes.bool,
+  shouldShowSend: PropTypes.func
 };
