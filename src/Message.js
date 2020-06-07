@@ -3,6 +3,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { View, ViewPropTypes, StyleSheet } from 'react-native';
+import deepEqual from 'fast-deep-equal';
 
 import Avatar from './Avatar';
 import Bubble from './Bubble';
@@ -48,7 +49,7 @@ export default class Message extends React.Component {
       return true
     }
 
-    return (
+    /* return (
       next.sent !== current.sent ||
       next.received !== current.received ||
       next.pending !== current.pending ||
@@ -58,7 +59,9 @@ export default class Message extends React.Component {
       next.video !== current.video ||
       next.audio !== current.audio ||
       JSON.stringify(previousMessage) !== JSON.stringify(nextPropsPreviousMessage)
-    );
+    ); */
+
+    return !deepEqual(next, current) || !deepEqual(previousMessage, nextPropsPreviousMessage)
   }
 
   getInnerComponentProps = () => {
