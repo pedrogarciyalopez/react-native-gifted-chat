@@ -169,11 +169,19 @@ export default class MessageContainer extends React.PureComponent {
       delete listViewProps.onScroll;
     }
 
+    if (listViewProps.ref) {
+        this.parentRef = listViewProps.ref;
+        delete listViewProps.ref;
+    }
+
     return (
       <View style={this.props.alignTop ? styles.containerAlignTop : styles.container}>
         {this.state.showScrollBottom && this.props.scrollToBottom ? this.renderScrollToBottomWrapper() : null}
         <FlatList
-          ref={(ref) => (this.flatListRef = ref)}
+          ref={(ref) => {
+              this.flatListRef = ref;
+              this.parentRef(ref);
+          }}
           extraData={this.props.extraData}
           keyExtractor={this.keyExtractor}
           enableEmptySections
