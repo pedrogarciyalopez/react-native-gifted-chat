@@ -180,7 +180,9 @@ export default class MessageContainer extends React.PureComponent {
         <FlatList
           ref={(ref) => {
               this.flatListRef = ref;
-              this.parentRef(ref);
+              if (this.parentRef) {
+                  this.parentRef(ref);
+              }
           }}
           extraData={this.props.extraData}
           keyExtractor={this.keyExtractor}
