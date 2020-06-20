@@ -60,7 +60,7 @@ export default class Message extends React.Component {
       next.audio !== current.audio ||
       JSON.stringify(previousMessage) !== JSON.stringify(nextPropsPreviousMessage)
     ); */
-
+    console.log(!deepEqual(next, current), !deepEqual(previousMessage, nextPropsPreviousMessage))
     return !deepEqual(next, current) || !deepEqual(previousMessage, nextPropsPreviousMessage)
   }
 
@@ -114,8 +114,9 @@ export default class Message extends React.Component {
 
   render() {
     const sameUser = isSameUser(this.props.currentMessage, this.props.nextMessage);
+
     return (
-      <View>
+      <View ref={ref => this.props.messageRef(this.props.currentMessage.uid, ref)}>
         {this.renderDay()}
         {this.props.currentMessage.system ? (
           this.renderSystemMessage()
