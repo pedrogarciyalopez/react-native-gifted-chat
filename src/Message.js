@@ -60,7 +60,6 @@ export default class Message extends React.Component {
       next.audio !== current.audio ||
       JSON.stringify(previousMessage) !== JSON.stringify(nextPropsPreviousMessage)
     ); */
-    console.log(!deepEqual(next, current), !deepEqual(previousMessage, nextPropsPreviousMessage))
     return !deepEqual(next, current) || !deepEqual(previousMessage, nextPropsPreviousMessage)
   }
 
