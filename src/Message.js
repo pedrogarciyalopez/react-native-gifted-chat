@@ -115,7 +115,7 @@ export default class Message extends React.Component {
     const sameUser = isSameUser(this.props.currentMessage, this.props.nextMessage);
 
     return (
-      <View ref={ref => this.props.messageRef(this.props.currentMessage.uid, ref)}>
+      <View ref={ref => this.props.messageRef(this.props.currentMessage, ref)}>
         {this.renderDay()}
         {this.props.currentMessage.system ? (
           this.renderSystemMessage()
